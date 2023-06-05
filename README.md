@@ -18,8 +18,8 @@ For your `guildId` it you don't have to put anything, as it is simply for testin
 
 # Deploying
 Deploying your commands is crucial in order to push your commands to the discord servers, that way people in servers can run them! To start, make sure all of your commands are in folders containing their topic, for example:
-`Commands/fun/ping.js`
-`Commands/utility/serverstats.js`
+`commands/fun/ping.js`
+`commands/utility/serverstats.js`
 
 Now all you have to do is run the command `node deploycommands.js` to deploy. Give it a few minutes and you should be able to run your bots commands.
 
