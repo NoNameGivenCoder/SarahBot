@@ -4,7 +4,7 @@ const path = require('node:path');
 const { Client, Events, Collection, GatewayIntentBits} = require('discord.js');
 const { token } = require('./config.json')
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages]})
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildModeration, GatewayIntentBits.GuildPresences]})
 
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands');
