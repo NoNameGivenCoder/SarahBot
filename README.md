@@ -22,3 +22,10 @@ Deploying your commands is crucial in order to push your commands to the discord
 `Commands/utility/serverstats.js`
 
 Now all you have to do is run the command `node deploycommands.js` to deploy. Give it a few minutes and you should be able to run your bots commands.
+
+# Commands
+For making commands visit these websites for help 
+
+https://old.discordjs.dev/#/docs/discord.js/main/general/welcome
+
+https://discordjs.guide/creating-your-bot/slash-commands.html#before-you-continue
