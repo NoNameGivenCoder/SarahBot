@@ -12,7 +12,8 @@ To actually use this bot make sure you have a `config.json` file inside of the r
     "guildId" : "guild-id-here",
     "clientId" : "application-id-here",
     "embedColor" : [0, 0, 0],
-    "website" : "server-website-here"
+    "website" : "server-website-here",
+    "statusC" : "bot-status"
 }
 ```
 For your `guildId` it you don't have to put anything, as it is simply for testing.
