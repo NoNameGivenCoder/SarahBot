@@ -8,7 +8,7 @@ To start your SarahBot, run the command `node .` in the root directory of your S
 To actually use this bot make sure you have a `config.json` file inside of the root directory containing these values
 ```
 {
-    "token" : "token-here",
+    "token" : "bot-token-here",
     "guildId" : "guild-id",
     "clientId" : "application-id",
     "embedColor" : [0, 0, 0]
