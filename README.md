@@ -9,9 +9,10 @@ To actually use this bot make sure you have a `config.json` file inside of the r
 ```
 {
     "token" : "bot-token-here",
-    "guildId" : "guild-id",
-    "clientId" : "application-id",
-    "embedColor" : [0, 0, 0]
+    "guildId" : "guild-id-here",
+    "clientId" : "application-id-here",
+    "embedColor" : [0, 0, 0],
+    "website" : "server-website-here"
 }
 ```
 For your `guildId` it you don't have to put anything, as it is simply for testing.
