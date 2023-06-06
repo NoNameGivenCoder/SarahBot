@@ -13,15 +13,16 @@ To actually use this bot make sure you have a `config.json` file inside of the r
     "clientId" : "application-id-here",
     "embedColor" : [0, 0, 0],
     "website" : "server-website-here",
-    "statusC" : "bot-status"
+    "statusStartup" : "bot-status"
 }
 ```
 For your `guildId` it you don't have to put anything, as it is simply for testing.
 
 # Deploying
-Deploying your commands is crucial in order to push your commands to the discord servers, that way people in servers can run them! To start, make sure all of your commands are in folders containing their topic, for example:
+Deploying your commands is crucial in order to push your commands to the discord servers, that way people in servers can run them! To start, make sure all of your commands are in different folders, for example:
 `commands/fun/ping.js`
 `commands/utility/serverstats.js`
+This is to keep things organized.
 
 Now all you have to do is run the command `node deploycommands.js` to deploy. Give it a few minutes and you should be able to run your bots commands.
 

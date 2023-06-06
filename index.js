@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const { Client, Events, Collection, GatewayIntentBits, ActivityType} = require('discord.js');
-const { token, statusC, website } = require('./config.json')
+const { token, statusStartup, website } = require('./config.json')
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildModeration, GatewayIntentBits.GuildPresences]})
 
@@ -56,7 +56,7 @@ client.once(Events.ClientReady, c => {
 		status : 'online',
 		activities : [
 			{
-				name : statusC
+				name : statusStartup
 			}
 		]
 	});

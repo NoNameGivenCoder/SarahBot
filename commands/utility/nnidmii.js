@@ -34,6 +34,6 @@ module.exports = {
             newEmbed = new EmbedBuilder().setColor(embedColor).setTitle(`${nnid}'s Mii`).setImage(`https://s3.us-east-1.amazonaws.com/mii-images.account.nintendo.net/${hash.data}_${expression}_face.png?lm=202304022129120000`)
         }
         
-        await interaction.deferReply({embeds : [newEmbed] });
+        await interaction.deferReply({ embeds : [newEmbed] });
     },
 };
