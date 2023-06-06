@@ -5,7 +5,7 @@ const axios = require('axios')
 module.exports = {
     data : new SlashCommandBuilder() 
         .setName('fetchmii')
-        .setDescription('Replies with pong!')
+        .setDescription("Fetch's mii with given options.")
 
         .addStringOption((option) => option.setName('nnid').setDescription("The NNID's mii to find").setRequired(true))
         .addStringOption((option) => option.setName('expression').setDescription("The Expression of the mii.").setRequired(true)
