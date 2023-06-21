@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "axios": "^1.4.0",
+    "colors": "^1.4.0",
     "discord.js": "^14.11.0",
     "http": "^0.0.1-security",
     "httpa": "^1.0.1",

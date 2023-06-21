@@ -2,12 +2,14 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { embedColor } = require('../../config.json')
 const axios = require('axios')
 
+const colors = require('colors')
+
 module.exports = {
     data : new SlashCommandBuilder() 
         .setName('fetchmii')
         .setDescription("Fetch's mii with given options.")
 
-        .addStringOption((option) => option.setName('nnid').setDescription("The NNID's mii to find").setRequired(true))
+        .addStringOption((option) => option.setName('nnid').setDescription("The NNID attached to the mii.").setRequired(true))
         .addStringOption((option) => option.setName('expression').setDescription("The Expression of the mii.").setRequired(true)
         .setChoices(
         { name : "normal", value : "normal" },
@@ -17,23 +19,45 @@ module.exports = {
         { name : "frustrated", value : "frustrated" },
         { name : "puzzled", value : "puzzled" }
         ))
-        .addBooleanOption((option) => option.setName("fullbody").setDescription("Full Body?").setRequired(true)),
+        .addBooleanOption((option) => option.setName("fullbody").setDescription("Full Body? (This will override any expression set)").setRequired(true)),
 
     async execute (interaction) {
         let nnid = interaction.options.getString('nnid')
         let expression = interaction.options.getString('expression')
         let fullbody = interaction.options.getBoolean('fullbody')
 
-        const hash = await axios.get(`https://nnidlt.murilo.eu.org/api.php?output=hash_only&env=production&user_id=${nnid}`)
+        await interaction.deferReply()
 
-        console.log(`Getting mii data for ${hash.data} or ${nnid}, with the ${expression} expression. Full Body?: ${fullbody}`)
+        try {
+            const hash = await axios.get(`https://nnidlt.murilo.eu.org/api.php?output=hash_only&env=production&user_id=${nnid}`)
 
-        if (fullbody) {
-            newEmbed = new EmbedBuilder().setColor(embedColor).setTitle(`${nnid}'s Mii`).setImage(`https://s3.us-east-1.amazonaws.com/mii-images.account.nintendo.net/${hash.data}_whole_body.png?lm=202304022129120000`)
-        } else {
-            newEmbed = new EmbedBuilder().setColor(embedColor).setTitle(`${nnid}'s Mii`).setImage(`https://s3.us-east-1.amazonaws.com/mii-images.account.nintendo.net/${hash.data}_${expression}_face.png?lm=202304022129120000`)
-        }
+            console.log(`\nGrabbed mii successfully!
+            \n--Options-- 
+            \nFullbody : ${fullbody.toString()}
+            \nNNID : ${nnid}
+            \nExpression : ${expression}`.green)
+
+            if (fullbody) {
+                newEmbed = new EmbedBuilder().setColor(embedColor).setTitle(`${nnid}'s Mii`).setImage(`https://s3.us-east-1.amazonaws.com/mii-images.account.nintendo.net/${hash.data}_whole_body.png?lm=202304022129120000`)
+            } else {
+                newEmbed = new EmbedBuilder().setColor(embedColor).setTitle(`${nnid}'s Mii`).setImage(`https://s3.us-east-1.amazonaws.com/mii-images.account.nintendo.net/${hash.data}_${expression}_face.png?lm=202304022129120000`)
+            }
         
-        await interaction.reply({ embeds : [newEmbed] });
+            interaction.followUp({ embeds : [newEmbed] });
+
+        } catch (error) {
+
+            newEmbed = new EmbedBuilder().setColor(embedColor).setTitle(`:x: Error! :x:`).setDescription(`${error}`)
+
+            interaction.followUp({ embeds: [newEmbed], ephemeral: true});
+
+            console.log(`\nHad an error trying to get ${nnid}'s mii.\n\nReturned with the error of: ${error}
+            \n--Options-- 
+            \nFullbody : ${fullbody.toString()}
+            \nNNID : ${nnid}
+            \nExpression : ${expression}`.red)
+        }
+       
+        
     },
 };
