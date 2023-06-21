@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
 const { embedColor } = require('../../config.json')
 const axios = require('axios')
 
@@ -26,6 +26,8 @@ module.exports = {
         let expression = interaction.options.getString('expression')
         let fullbody = interaction.options.getBoolean('fullbody')
 
+        var link = null
+
         await interaction.deferReply()
 
         try {
@@ -38,12 +40,19 @@ module.exports = {
             \nExpression : ${expression}`.green)
 
             if (fullbody) {
-                newEmbed = new EmbedBuilder().setColor(embedColor).setTitle(`${nnid}'s Mii`).setImage(`https://s3.us-east-1.amazonaws.com/mii-images.account.nintendo.net/${hash.data}_whole_body.png?lm=202304022129120000`)
+                link = `https://s3.us-east-1.amazonaws.com/mii-images.account.nintendo.net/${hash.data}_whole_body.png?lm=202304022129120000`
+
+                newEmbed = new EmbedBuilder().setColor(embedColor).setTitle(`${nnid}'s Mii`).setImage(link)
             } else {
-                newEmbed = new EmbedBuilder().setColor(embedColor).setTitle(`${nnid}'s Mii`).setImage(`https://s3.us-east-1.amazonaws.com/mii-images.account.nintendo.net/${hash.data}_${expression}_face.png?lm=202304022129120000`)
+                link = `https://s3.us-east-1.amazonaws.com/mii-images.account.nintendo.net/${hash.data}_${expression}_face.png?lm=202304022129120000`
+
+                newEmbed = new EmbedBuilder().setColor(embedColor).setTitle(`${nnid}'s Mii`).setImage(link)
             }
+
+            const button = new ButtonBuilder().setURL(link).setStyle(ButtonStyle.Link).setLabel("Download")
+            const row = new ActionRowBuilder().addComponents(button)
         
-            interaction.followUp({ embeds : [newEmbed] });
+            interaction.followUp({ embeds : [newEmbed], components : [row]});
 
         } catch (error) {
 
